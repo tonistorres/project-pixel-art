@@ -11,7 +11,7 @@ function painterElementsCollorPalette() {
     let captureElement = document.querySelectorAll('.color');
     for (let i = 0; i < captureElement.length; i += 1) {
         if(i===0){
-            captureElement[i].style.background="red";
+            captureElement[i].style.background="black";
         }else if(i===1){
             captureElement[i].style.background="blue";
         }else if(i===2){
