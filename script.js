@@ -9,36 +9,57 @@ window.onload = function () {
 
 }
 
-/*Criando as divs que serão setadas na div color-palette*/
+function elementColorBlackSelected() {
+    let captureElement = document.querySelector('#elementStart');
+    console.log("Element Start" + captureElement);
+}
+
+
+
+/*Função cria a paleta de Cores */
 function createPalette() {
     let line = 4;
     let containerPaletteColor = document.getElementById('color-palette');
     for (let i = 0; i < line; i++) {
-        // criar um elemento html dianâmico para colocar na list ordenada
-        let objectCreateDiv = document.createElement('div');
-        objectCreateDiv.setAttribute("class", "color");
-        containerPaletteColor.appendChild(objectCreateDiv);
+
+        if (i === 0) {
+            const div = document.createElement('div');
+            //div.className='color';
+            div.classList.add("color", "selected");
+            containerPaletteColor.appendChild(div);
+        } else {
+            const div = document.createElement('div');
+            div.className = 'color';
+            containerPaletteColor.appendChild(div);
+        }
     }
-    //pincel de cores 
     painterElementsCollorPalette();
 }
+
+
+
 /*Da cores a Paleta de Quatro Cores Cirada*/
 function painterElementsCollorPalette() {
+
     let captureElement = document.querySelectorAll('.color');
+    console.log("Capture Elemento: " + captureElement.length);
+
     for (let i = 0; i < captureElement.length; i += 1) {
+
         if (i === 0) {
             captureElement[i].style.background = "black";
+
         } else if (i === 1) {
             captureElement[i].style.background = "blue";
-        } else if (i === 2) {
+        } else if (i == 3) {
             captureElement[i].style.background = "yellow";
-        } else {
+        }
+        else {
             captureElement[i].style.background = "green";
         }
     }
+
 }
-
-
 function createDivsContainer() {
     let line = 5;
     let containerPrincipalI = document.getElementById('container-1');
