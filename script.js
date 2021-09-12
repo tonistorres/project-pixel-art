@@ -13,150 +13,30 @@ let capureELementGridContainerI;
 let containerPrincipalI;
 let containerPixelBoard = document.getElementById('pixel-board');
 let containerBoxInfo = document.getElementById('box-info');
+let containerPaletteColor; //Variável Utilizada para Criar a Paleta Principal de Cores
+let captureClassColor = document.getElementsByClassName('color');//capturas todas divs contém class color
+let captureClassPixels = document.getElementsByClassName('pixel');//capturas todas divs contém class pixels
 
 window.onload = function () {
-    createPalette();
-    criarContainersDivs();
-    createDivsPixels();
-    carregaElementsPaletteMain();
-    carragaElementsPixelDivs();
-
-    //eventColorPaletteColorFatherStart();
-}
-
-let captureElementPaletteColorFather = document.getElementsByClassName('color');
-
-
-function carregaElementsPaletteMain() {
-
-    for (let i = 0; i < captureElementPaletteColorFather.length; i += 1) {
-
-
-        switch (i) {
-
-            case 0:
-
-               containerBoxInfo.innerText = "User Experience:"
-                containerBoxInfo.innerText += " "+"Cor Preta da Paleta de Cores Selecionada: ";
-
-                //Function Duplo Click
-                captureElementPaletteColorFather[i].addEventListener("dblclick", function () {
-
-                    if (captureElementPaletteColorFather[0].getAttribute("class") === "color selected black") {
-                      
-                        captureElementPaletteColorFather[0].classList.remove("class","selected");
-                        
-                        
-                        
-                        
-                        alert("Capturando: "+captureElementPaletteColorFather[0].getAttribute("class"))
-                        
-
-                        containerBoxInfo.innerText = "User Experience:"
-                        containerBoxInfo.innerText += "Cor Branca Selecionada. Para Continuar Pintando Selecione uma Nova Cor";
-
-
-                    }
-
-
-
-                });
-
-                //Function Click 
-                captureElementPaletteColorFather[i].addEventListener("click", function () {
-
-
-                    if (captureElementPaletteColorFather[0].getAttribute("class") === "color black") {
-                        
-                        captureElementPaletteColorFather[0].classList.remove("class","black");
-                        captureElementPaletteColorFather[0].classList.add("selected");
-                        captureElementPaletteColorFather[0].classList.add("black");
-
-                        alert("Capturando: "+captureElementPaletteColorFather[0].getAttribute("class"))
-
-                        containerBoxInfo.innerText = "User Experience:"
-                        containerBoxInfo.innerText += " Cor Preta da Paleta Selecionada";
-                    }
-
-                });
-
-
-                break;
-            case 1:
-                break;
-
-        }
-
-
-    }
+    createPalette(); //função cria a paleta de cores MAIN 
+    criarContainersDivs();//função cria o container onde ficará as divs Pixels
+    createDivsPixels();// função cria as divs pixels 
+    addListeningMainReed();//função estuta elementos da paleta de cores
+    addListeningMainReedDivsPixels();//funçâo Escuta Quadrados
 
 }
 
 
-/**FUNÇÃO DE PALETA DE CORES TRABALHANDO */
-let captureElementPixelDivs = document.getElementsByClassName('pixel');
-function carragaElementsPixelDivs() {
-    for (let i = 0; i < captureElementPixelDivs.length; i += 1) {
-        switch (i) {
-            case 0:
 
-                captureElementPixelDivs[i].addEventListener("click", function () {
-                    if (captureElementPaletteColorFather[i].getAttribute("class") === "color selected black") {
-                        captureElementPixelDivs[i].classList.add("black");
-                    } else if (captureElementPaletteColorFather[i].getAttribute("class") === "color selected blue") {
-                        captureElementPixelDivs[i].classList.add("blue");
-                    } else if (captureElementPaletteColorFather[i].getAttribute("class") === "color selected yellow") {
-                        captureElementPixelDivs[i].classList.add("yellow");
-                    } else if (captureElementPaletteColorFather[i].getAttribute("class") === "color selected green") {
-                        captureElementPixelDivs[i].classList.add("green");
-                    }
-                    else {
-                        
-                        if(captureElementPixelDivs[i].getAttribute("class")==="pixel black"){
-                            captureElementPixelDivs[i].classList.remove("class","black");
-                            alert("Classe(s) Predominante: "+captureElementPixelDivs[i].getAttribute("class"))
-                        }
-                        
-                        
-                        
-                    }
-
-                });
-                break;
-
-            case 1:
-                //  console.log("falta programar");
-                break;
-            case 2:
-                // console.log("falta programar");
-                break;
-            case 3:
-                // console.log("falta programar");
-                break;
-
-            // default:
-            //     console.log("nenhuma das anteriores ");
-
-        }
-
-
-
-    }
-}
-
-
-/*Função cria as quatro paletas de cores que servirão para pintar*/
+/*Função Cria a Paleta Principal de Cores, e adiciona as respectivas classes*/
 function createPalette() {
     let line = 4;
-    let containerPaletteColor = document.getElementById('color-palette');
+    containerPaletteColor = document.getElementById('color-palette');
     for (let i = 0; i < line; i++) {
         if (i === 0) {
-
             const div = document.createElement('div');
-            div.classList.add("color", "selected", "black");
+            div.classList.add("color", "black", "selected");
             containerPaletteColor.appendChild(div);
-
-
         } else if (i === 1) {
             const div = document.createElement('div');
             div.classList.add("color", "blue");
@@ -174,7 +54,52 @@ function createPalette() {
 
 }
 
-/**Função cria as 05 (Divs Container que receberam em cada 5 divs Pixels) */
+/*Seleciona coloca a class selected no elemento atual ao passo que retira o selected 
+da classe antes selecionada 
+*/
+function addSelectedEvent(event) {
+    let handleSelected = document.querySelector('.selected');
+    handleSelected.classList.remove('selected');//o black inicializa com elemento selected quando clicar remove
+    event.target.classList.add('selected');//e adiciona no elemento clicado 
+
+}
+
+/*Colocando escuta nos Elementos da Paleta de Cores */
+function addListeningMainReed() {
+    for (let i = 0; i < captureClassColor.length; i += 1) {
+        captureClassColor[i].addEventListener("click", addSelectedEvent);
+    }
+}
+
+function selectSquarePixels(event) {
+
+    let handleSelected = document.querySelector('.selected');
+
+    if (handleSelected.getAttribute("class") === "color black selected") {
+        let removeBlack=document.querySelector('.pixel.black');
+        console.log(removeBlack);
+        //removeBlack.classList.remove("black");
+         event.target.classList.add("black");
+    } else if (handleSelected.getAttribute("class") === "color blue selected") {
+        event.target.classList.add("blue");
+    } else if (handleSelected.getAttribute("class") === "color yellow selected") {
+        event.target.classList.add("yellow");
+    } else if (handleSelected.getAttribute("class") === "color green selected") {
+        event.target.classList.add("green");
+    }
+
+}
+
+/*Função Adiciona Escuta nos Quadrados */
+function addListeningMainReedDivsPixels() {
+
+    for (let i = 0; i < captureClassPixels.length; i += 1) {
+        captureClassPixels[i].addEventListener("click", selectSquarePixels);
+
+    }
+}
+
+/**Função cria Container Recebe 25 divs) */
 function criarContainersDivs() {
     let objectCreateDiv = document.createElement('div');
     objectCreateDiv.setAttribute("id", "container-divs-pixels");
@@ -193,3 +118,4 @@ function createDivsPixels() {
         containerPrincipalI.appendChild(objectCreateDiv);
     }
 }
+
