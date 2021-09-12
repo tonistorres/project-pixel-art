@@ -115,6 +115,7 @@ function createDivsPixels() {
     for (let i = 0; i < line; i++) {
         let objectCreateDiv = document.createElement('div');
         objectCreateDiv.setAttribute("class", "pixel");
+        objectCreateDiv.className+=" white";
         containerPrincipalI.appendChild(objectCreateDiv);
     }
 }
