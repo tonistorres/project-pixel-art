@@ -1,10 +1,60 @@
+
+#container-info-bar{
+ 
+    margin-top: 10px;
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+    height: 30px;
+    
+}
+
+#box-info{
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+    width: 800px;
+     margin: 5px;
+    text-align: left;     /* will center text in <p>, which is not a flex item */
+    background: #2fc18c;
+    padding: 10px 10px 10px 10px;
+    color: white;
+}
+
+
+
 .color{
     border:1px solid black ;
     display: inline-block;
     height: 40px;
     width: 40px;
-    
+}
 
+.model{
+    display: flex;
+    justify-content: center;
+    display: inline-block;
+    border:1px solid black ;
+    height: 240px;
+    width: 240px;
+    text-align: center;
+    padding-top: 10px;
+    margin: left 39px;%;
+    margin-top: 1%;
+}
+
+#pixel-board{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.perfomace-palette{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pixel{
@@ -21,6 +71,49 @@
     height: 40px;
     width: 40px;
     background: black;
-    
+}
+
+.black{
+    border:1px solid black ;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: black;
+}
+
+.blue{
+    border:1px solid black ;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: blue;
+}
+.yellow{
+    border:1px solid black ;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: yellow;
+}
+
+.green{
+    border:1px solid black ;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: green;
+}
+
+.white{
+    border:1px solid black ;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: white;
+}
+
+ 
+h1{
+    text-align: center;
 
 }
