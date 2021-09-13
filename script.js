@@ -26,6 +26,9 @@ window.onload = function () {
     addListeningMainReed();//função estuta elementos da paleta de cores
     addListeningMainReedDivsPixels();//funçâo Escuta Quadrados
 
+
+   
+
 }
 
 
@@ -158,3 +161,28 @@ function clearBottom() {
 }
 
 captureBottom.addEventListener("click", clearBottom);
+
+
+ //criando de forma dinamica
+ let bottonVqv = document.querySelector('#generate-board');
+ bottonVqv.addEventListener("click", function () {
+     let theAmount = document.getElementById('board-size')
+     let line = theAmount;
+     containerPrincipalI = document.getElementById('container-divs-pixels');
+     for (let i = 0; i < line; i++) {
+         let objectCreateDiv = document.createElement('div');
+         objectCreateDiv.setAttribute("class", "pixel");
+         //https://www.w3schools.com/jsref/prop_html_classname.asp
+         objectCreateDiv.className += " white";
+         containerPrincipalI.appendChild(objectCreateDiv);
+         console.log("numero Elementos"+i)
+     }
+
+     
+     location.reload();
+ });
+
+
+
+
+
