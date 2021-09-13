@@ -75,18 +75,35 @@ function selectSquarePixels(event) {
 
     let handleSelected = document.querySelector('.selected');
 
-    if (handleSelected.getAttribute("class") === "color black selected") {
-        let removeBlack=document.querySelector('.pixel.black');
-        console.log(removeBlack);
-        //removeBlack.classList.remove("black");
-         event.target.classList.add("black");
-    } else if (handleSelected.getAttribute("class") === "color blue selected") {
+
+    let pixelRemove = document.querySelectorAll('.white');
+
+    alert(pixelRemove.length);
+    
+    for (let i = 0; i < pixelRemove.length; i++) {
+        pixelRemove[i].classList.remove('white');
+
+    }
+
+    if (handleSelected.classList.contains('black')) {
+
+        event.target.classList.add("black");
+
+    } else if (handleSelected.classList.contains('blue')) {
+
         event.target.classList.add("blue");
-    } else if (handleSelected.getAttribute("class") === "color yellow selected") {
+
+    } else if (handleSelected.classList.contains('yellow')) {
+
         event.target.classList.add("yellow");
-    } else if (handleSelected.getAttribute("class") === "color green selected") {
+
+    } else {
+
         event.target.classList.add("green");
     }
+
+
+
 
 }
 
@@ -115,7 +132,8 @@ function createDivsPixels() {
     for (let i = 0; i < line; i++) {
         let objectCreateDiv = document.createElement('div');
         objectCreateDiv.setAttribute("class", "pixel");
-        objectCreateDiv.className+=" white";
+        //https://www.w3schools.com/jsref/prop_html_classname.asp
+        objectCreateDiv.className += " white";
         containerPrincipalI.appendChild(objectCreateDiv);
     }
 }
