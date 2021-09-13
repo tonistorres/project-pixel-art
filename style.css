@@ -22,6 +22,19 @@
     color: white;
 }
 
+#button{
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+    width: 240px;
+    margin-top: 0.5%;
+    margin-bottom: 1%; 
+    text-align: center;     /* will center text in <p>, which is not a flex item */
+    background: #2fc18c;
+    padding: 10px 10px 10px 10px;
+    color: white;
+}
+
 
 
 .color{
@@ -40,8 +53,7 @@
     width: 240px;
     text-align: center;
     padding-top: 10px;
-    margin: left 39px;%;
-    margin-top: 1%;
+    margin-top: 3%;
 }
 
 #pixel-board{
@@ -55,6 +67,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 4%;
 }
 
 .pixel{

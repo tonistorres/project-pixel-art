@@ -16,6 +16,8 @@ let containerBoxInfo = document.getElementById('box-info');
 let containerPaletteColor; //Variável Utilizada para Criar a Paleta Principal de Cores
 let captureClassColor = document.getElementsByClassName('color');//capturas todas divs contém class color
 let captureClassPixels = document.getElementsByClassName('pixel');//capturas todas divs contém class pixels
+let captureBottom = document.getElementById('clear-board');
+
 
 window.onload = function () {
     createPalette(); //função cria a paleta de cores MAIN 
@@ -79,7 +81,7 @@ function selectSquarePixels(event) {
     let pixelRemove = document.querySelectorAll('.white');
 
     alert(pixelRemove.length);
-    
+
     for (let i = 0; i < pixelRemove.length; i++) {
         pixelRemove[i].classList.remove('white');
 
@@ -138,3 +140,21 @@ function createDivsPixels() {
     }
 }
 
+
+/**Função Limar do Botão */
+function clearBottom() {
+
+    let clearPixels = document.querySelectorAll('.pixel');
+
+    for (let i = 0; i < clearPixels.length; i++) {
+        clearPixels[i].classList.remove('black');
+        clearPixels[i].classList.remove('yellow');
+        clearPixels[i].classList.remove('blue');
+        clearPixels[i].classList.remove('green');
+        clearPixels[i].classList.add('white');
+
+    }
+
+}
+
+captureBottom.addEventListener("click", clearBottom);
