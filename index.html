@@ -12,19 +12,20 @@
 <body>
     <h1 id="title">Paleta de Cores</h1>
     <div id="color-palette" class="perfomace-palette"></div>
-
-    <div id="container-info-bar">
+    
+    <div id="container-button">
         <div id="button">
             <button id="clear-board" type="button">Limpar</button>
-            <input type="number" id="board-size" name="quantity" min="5" max="50">
-            <button id="generate-board" type="button">VQV</button>
+            <input type="number" id="board-size" name="quantity"  min="5" oninput="validity.valid||(value='');" >
+            <button type="button" id="generate-board" > VQV</button>
         </div>
     </div>
 
-    <div id="pixel-board">
+    <div id="pixel-board" class=""></div>
 
-    </div>
     <script src="script.js"></script>
 </body>
+
+
 
 </html>

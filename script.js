@@ -10,28 +10,22 @@
 //*********************************************************************************** */
 
 let capureELementGridContainerI;
-let containerPrincipalI;
+
 let containerPixelBoard = document.getElementById('pixel-board');
 let containerBoxInfo = document.getElementById('box-info');
 let containerPaletteColor; //Variável Utilizada para Criar a Paleta Principal de Cores
 let captureClassColor = document.getElementsByClassName('color');//capturas todas divs contém class color
 let captureClassPixels = document.getElementsByClassName('pixel');//capturas todas divs contém class pixels
 let captureBottom = document.getElementById('clear-board');
+let input = document.getElementById('board-size');
 
 
 window.onload = function () {
     createPalette(); //função cria a paleta de cores MAIN 
-    criarContainersDivs();//função cria o container onde ficará as divs Pixels
-    createDivsPixels();// função cria as divs pixels 
     addListeningMainReed();//função estuta elementos da paleta de cores
     addListeningMainReedDivsPixels();//funçâo Escuta Quadrados
-
-
-   
-
+    startupPixels();//Função inicializa square com 25pixels
 }
-
-
 
 /*Função Cria a Paleta Principal de Cores, e adiciona as respectivas classes*/
 function createPalette() {
@@ -76,42 +70,8 @@ function addListeningMainReed() {
     }
 }
 
-function selectSquarePixels(event) {
 
-    let handleSelected = document.querySelector('.selected');
-
-
-    let pixelRemove = document.querySelectorAll('.white');
-
-    alert(pixelRemove.length);
-
-    for (let i = 0; i < pixelRemove.length; i++) {
-        pixelRemove[i].classList.remove('white');
-
-    }
-
-    if (handleSelected.classList.contains('black')) {
-
-        event.target.classList.add("black");
-
-    } else if (handleSelected.classList.contains('blue')) {
-
-        event.target.classList.add("blue");
-
-    } else if (handleSelected.classList.contains('yellow')) {
-
-        event.target.classList.add("yellow");
-
-    } else {
-
-        event.target.classList.add("green");
-    }
-
-
-
-
-}
-
+//TRABALHAR AQUI 
 /*Função Adiciona Escuta nos Quadrados */
 function addListeningMainReedDivsPixels() {
 
@@ -121,68 +81,99 @@ function addListeningMainReedDivsPixels() {
     }
 }
 
-/**Função cria Container Recebe 25 divs) */
-function criarContainersDivs() {
-    let objectCreateDiv = document.createElement('div');
-    objectCreateDiv.setAttribute("id", "container-divs-pixels");
-    objectCreateDiv.setAttribute("class", "model");
-    containerPixelBoard.appendChild(objectCreateDiv);
-}
-
-
-/**Função Cria os 25 quadrados(pixels) de forma Automatizada */
-function createDivsPixels() {
-    let line = 25;
-    containerPrincipalI = document.getElementById('container-divs-pixels');
-    for (let i = 0; i < line; i++) {
-        let objectCreateDiv = document.createElement('div');
-        objectCreateDiv.setAttribute("class", "pixel");
-        //https://www.w3schools.com/jsref/prop_html_classname.asp
-        objectCreateDiv.className += " white";
-        containerPrincipalI.appendChild(objectCreateDiv);
-    }
-}
-
-
-/**Função Limar do Botão */
+/*************INICIO IMPLEMENTAÇÃO FUNÇÃO LIMPAR DO BOTÃO*********/
 function clearBottom() {
-
     let clearPixels = document.querySelectorAll('.pixel');
-
     for (let i = 0; i < clearPixels.length; i++) {
         clearPixels[i].classList.remove('black');
         clearPixels[i].classList.remove('yellow');
         clearPixels[i].classList.remove('blue');
         clearPixels[i].classList.remove('green');
         clearPixels[i].classList.add('white');
+    }
+}
 
+//Colocando escuta no Botão Limpar
+captureBottom.addEventListener("click", clearBottom);
+
+
+/*********** INICIO IMPLEMENTANDO FUNÇÃO DINÂMICA ************/
+let buttonVqv = document.querySelector('#generate-board');
+
+buttonVqv.addEventListener("click", function (event) {
+
+    let theAmount = document.getElementById('board-size');
+    let lineAndCollum = theAmount.value;
+    let containerPrincipalI = document.getElementById('pixel-board');
+    containerPrincipalI.innerHTML = "";
+
+    for (let i = 0; i < lineAndCollum; i += 1) {
+
+        let recipienteDivsForJ = document.createElement('div');
+        containerPrincipalI.appendChild(recipienteDivsForJ);
+
+        for (let j = 0; j < lineAndCollum; j += 1) {
+            let objectCreateDiv = document.createElement('div');
+            objectCreateDiv.setAttribute("class", "pixel");
+            objectCreateDiv.className += " white";
+            objectCreateDiv.addEventListener("click", selectSquarePixels);
+            recipienteDivsForJ.appendChild(objectCreateDiv);
+        }
+    }
+
+});
+
+
+function selectSquarePixels(event) {
+    let handleSelected = document.querySelector('.selected');
+    let pixelRemove = document.querySelectorAll('.white');
+    
+    for (let i = 0; i < pixelRemove.length; i++) {
+        pixelRemove[i].classList.remove('white');
+    }
+    if (handleSelected.classList.contains('black')) {
+        event.target.classList.add("black");
+    } else if (handleSelected.classList.contains('blue')) {
+        event.target.classList.add("blue");
+    } else if (handleSelected.classList.contains('yellow')) {
+        event.target.classList.add("yellow");
+    } else {
+        event.target.classList.add("green");
+    }
+}
+
+function startupPixels() {
+
+    let lineAndCollum = 5;
+    let containerPrincipalI = document.getElementById('pixel-board');
+    containerPrincipalI.innerHTML = "";
+
+    for (let i = 0; i < lineAndCollum; i += 1) {
+
+        let recipienteDivsForJ = document.createElement('div');
+        containerPrincipalI.appendChild(recipienteDivsForJ);
+
+        for (let j = 0; j < lineAndCollum; j += 1) {
+            let objectCreateDiv = document.createElement('div');
+            objectCreateDiv.setAttribute("class", "pixel");
+            objectCreateDiv.className += " white";
+            objectCreateDiv.addEventListener("click", selectSquarePixels);
+            recipienteDivsForJ.appendChild(objectCreateDiv);
+        }
     }
 
 }
 
-captureBottom.addEventListener("click", clearBottom);
+//tratamento campo button falar com TALES
+input.addEventListener('keypress', function (e) {
+    let input = document.getElementById('board-size');
+    let button=document.getElementById('generate-board');
 
+    if( e.target.value>50){
+        button.focus();
+        input.innerText="";
+        input.value=5;
+    }
+   
 
- //criando de forma dinamica
- let bottonVqv = document.querySelector('#generate-board');
- bottonVqv.addEventListener("click", function () {
-     let theAmount = document.getElementById('board-size')
-     let line = theAmount;
-     containerPrincipalI = document.getElementById('container-divs-pixels');
-     for (let i = 0; i < line; i++) {
-         let objectCreateDiv = document.createElement('div');
-         objectCreateDiv.setAttribute("class", "pixel");
-         //https://www.w3schools.com/jsref/prop_html_classname.asp
-         objectCreateDiv.className += " white";
-         containerPrincipalI.appendChild(objectCreateDiv);
-         console.log("numero Elementos"+i)
-     }
-
-     
-     location.reload();
- });
-
-
-
-
-
+});

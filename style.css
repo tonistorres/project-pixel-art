@@ -2,6 +2,7 @@
 #container-info-bar{
  
     margin-top: 10px;
+    
     display: flex;           /* establish flex container */
     flex-direction: column;  /* make main axis vertical */
     justify-content: center; /* center items vertically, in this case */
@@ -44,30 +45,30 @@
     width: 40px;
 }
 
+
+
 .model{
-    display: flex;
-    justify-content: center;
-    display: inline-block;
-    border:1px solid black ;
-    height: 240px;
-    width: 240px;
-    text-align: center;
-    padding-top: 10px;
-    margin-top: 3%;
+    
+    align-items: center;     /* center items horizontally, in this case */
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    height: 30px;
+    justify-content: center; /* center items vertically, in this case */
+    margin-top: 12%;
+    
 }
 
-#pixel-board{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#container-button{
+    align-items: center;     /* center items horizontally, in this case */
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
 }
-
-
 .perfomace-palette{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 4%;
+    margin-bottom: 1%;
 }
 
 .pixel{
@@ -129,4 +130,8 @@
 h1{
     text-align: center;
 
+}
+
+body{
+    text-align: center;
 }
