@@ -1,5 +1,7 @@
 //************************************************************************************ */
 // Direitos Intelectuais:
+//Repositorio Avaliativo:https://github.com/tryber/sd-016-b-project-pixels-art/pull/50
+//Repositorio Descritivo:https://github.com/tryber/sd-016-b-project-pixels-art/tree/tonis-torres-project-pixels-art
 // https://projects.raspberrypi.org/pt-PT/projects/pixel-art/6
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
 // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_setattribute1
@@ -17,7 +19,7 @@ let containerPaletteColor; //Variável Utilizada para Criar a Paleta Principal d
 let captureClassColor = document.getElementsByClassName('color');//capturas todas divs contém class color
 let captureClassPixels = document.getElementsByClassName('pixel');//capturas todas divs contém class pixels
 let captureBottom = document.getElementById('clear-board');
-let input = document.getElementById('board-size');
+let input = document.getElementById('generate-board');
 
 
 window.onload = function () {
@@ -100,34 +102,61 @@ captureBottom.addEventListener("click", clearBottom);
 /*********** INICIO IMPLEMENTANDO FUNÇÃO DINÂMICA ************/
 let buttonVqv = document.querySelector('#generate-board');
 
-buttonVqv.addEventListener("click", function (event) {
+buttonVqv.addEventListener("click", function () {
 
     let theAmount = document.getElementById('board-size');
-    let lineAndCollum = theAmount.value;
-    let containerPrincipalI = document.getElementById('pixel-board');
-    containerPrincipalI.innerHTML = "";
 
-    for (let i = 0; i < lineAndCollum; i += 1) {
+    if (theAmount.value !== "") {
 
-        let recipienteDivsForJ = document.createElement('div');
-        containerPrincipalI.appendChild(recipienteDivsForJ);
+        validateProhibited(theAmount);
 
-        for (let j = 0; j < lineAndCollum; j += 1) {
-            let objectCreateDiv = document.createElement('div');
-            objectCreateDiv.setAttribute("class", "pixel");
-            objectCreateDiv.className += " white";
-            objectCreateDiv.addEventListener("click", selectSquarePixels);
-            recipienteDivsForJ.appendChild(objectCreateDiv);
+
+        let lineAndCollum = theAmount.value;
+        
+        //ADICIONANDO NO CONTAINER PRINCIPAL 
+        let containerPrincipalI = document.getElementById('pixel-board');
+        containerPrincipalI.innerHTML = "";
+
+        for (let i = 0; i < lineAndCollum; i += 1) {
+
+            let recipienteDivsForJ = document.createElement('div');
+            containerPrincipalI.appendChild(recipienteDivsForJ);
+
+            for (let j = 0; j < lineAndCollum; j += 1) {
+                let objectCreateDiv = document.createElement('div');
+                objectCreateDiv.setAttribute("class", "pixel");
+                objectCreateDiv.className += " white";
+                objectCreateDiv.addEventListener("click", selectSquarePixels);
+                recipienteDivsForJ.appendChild(objectCreateDiv);
+            }
         }
+
+    } else {
+        return alert('Board inválido!');
     }
+
+
+
 
 });
 
+//FUNCTION VALIDAÇÃO NUMBER
+function validateProhibited(nubmer) {
 
+    let valuePattern = document.getElementById('board-size');
+    let convertingNumber = parseInt(nubmer.value);
+ 
+    if(convertingNumber<5 || convertingNumber>50){
+        valuePattern.value=5;
+        return alert('Valor Inválido!! Setando valor Inicial Padrao')
+    }
+}
+
+//SELECIONA PIXELS 
 function selectSquarePixels(event) {
     let handleSelected = document.querySelector('.selected');
     let pixelRemove = document.querySelectorAll('.white');
-    
+
     for (let i = 0; i < pixelRemove.length; i++) {
         pixelRemove[i].classList.remove('white');
     }
@@ -142,6 +171,7 @@ function selectSquarePixels(event) {
     }
 }
 
+//FALAR COM TALES COMO POSSO MELHORAR ISSO 
 function startupPixels() {
 
     let lineAndCollum = 5;
@@ -164,16 +194,6 @@ function startupPixels() {
 
 }
 
-//tratamento campo button falar com TALES
-input.addEventListener('keypress', function (e) {
-    let input = document.getElementById('board-size');
-    let button=document.getElementById('generate-board');
 
-    if( e.target.value>50){
-        button.focus();
-        input.innerText="";
-        input.value=5;
-    }
-   
 
-});
+

@@ -1,9 +1,12 @@
 
+
+#board-size{
+    width: 50px;
+}
 #container-info-bar{
  
-    margin-top: 10px;
-    
     display: flex;           /* establish flex container */
+    margin-top: 10px;
     flex-direction: column;  /* make main axis vertical */
     justify-content: center; /* center items vertically, in this case */
     align-items: center;     /* center items horizontally, in this case */
@@ -52,9 +55,11 @@
     align-items: center;     /* center items horizontally, in this case */
     display: flex;           /* establish flex container */
     flex-direction: column;  /* make main axis vertical */
-    height: 30px;
+    width: 100%;
     justify-content: center; /* center items vertically, in this case */
-    margin-top: 12%;
+   /* margin-top: 12%;*/
+
+  /* margin: 10% 10% 10% 10%;*/
     
 }
 
